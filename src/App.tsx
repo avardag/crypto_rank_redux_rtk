@@ -19,7 +19,7 @@ function App() {
       <div className="navbar">
         <Navbar />
       </div>
-      <div className="main">
+      <div className="main" style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <Switch>
           <Route exact path="/">
             <Homepage />
@@ -40,8 +40,7 @@ function App() {
       </div>
       <div className="footer">
         <Typography variant={"h5"} style={{ textAlign: "center" }}>
-          Copyright © 2021
-          <Link to="/">Cryptoverse Inc.</Link> <br />
+          Copyright © 2021 <Link to="/">ReduxCoin Inc.</Link> <br />
           All Rights Reserved.
         </Typography>
         <Grid
@@ -67,3 +66,5 @@ function App() {
 }
 
 export default App;
+
+//56.17
