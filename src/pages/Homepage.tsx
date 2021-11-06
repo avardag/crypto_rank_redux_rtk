@@ -13,37 +13,38 @@ import { useGetCryptosQuery } from "../app/features/cryptoAPI";
 //styles
 import { HomeHeading, HomeShowMoreBtn } from "./Homepage.styles";
 import { Cryptocurrencies, News } from "./index";
+import { Loading } from "../components";
 
 function Homepage() {
-  const { data, error, isLoading } = useGetCryptosQuery();
+  const { data, error, isLoading } = useGetCryptosQuery(10);
   const globalStats = data?.data?.stats;
-  if (!globalStats) return <div>Loading</div>;
-  if (isLoading) return <div>Loading</div>;
+  if (!globalStats) return <Loading />;
+  if (isLoading) return <Loading />;
   return (
     <div>
       <Paper sx={{ p: 4 }}>
-        <Typography variant="h2" component="div" align={"center"}>
+        <Typography gutterBottom variant="h2" component="div" align={"center"}>
           Global Crypto stats
         </Typography>
         <Grid container spacing={2}>
           <Grid item md={6}>
-            <Typography>Total Cryptocurrencies</Typography>
+            <Typography variant="subtitle2">Total Cryptocurrencies</Typography>
             <p>{globalStats.total}</p>
           </Grid>
           <Grid item md={6}>
-            <Typography>Total Exchanges</Typography>
+            <Typography variant="subtitle2">Total Exchanges</Typography>
             <p>{millify(globalStats.totalExchanges)}</p>
           </Grid>
           <Grid item md={6}>
-            <Typography>Total Market Cap:</Typography>
+            <Typography variant="subtitle2">Total Market Cap:</Typography>
             <p>{millify(globalStats.totalMarketCap)}</p>
           </Grid>
           <Grid item md={6}>
-            <Typography>Total 24h Volume</Typography>
+            <Typography variant="subtitle2">Total 24h Volume</Typography>
             <p>{millify(globalStats.total24hVolume)}</p>
           </Grid>
           <Grid item md={6}>
-            <Typography>Total Markets</Typography>
+            <Typography variant="subtitle2">Total Markets</Typography>
             <p>{millify(globalStats.totalMarkets)}</p>
           </Grid>
         </Grid>
@@ -54,7 +55,7 @@ function Homepage() {
           <Link to="/cryptocurrencies">Show more</Link>
         </HomeShowMoreBtn>
       </HomeHeading>
-      <Cryptocurrencies />
+      <Cryptocurrencies simplified />
       <HomeHeading>
         <h2>Latest Crypto News</h2>
         <HomeShowMoreBtn>
