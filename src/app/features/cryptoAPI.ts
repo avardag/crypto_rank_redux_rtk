@@ -50,9 +50,10 @@ export type APIResponse = {
   };
   status: string;
 };
+
 const cryptoApiHeaders = {
   "x-rapidapi-host": "coinranking1.p.rapidapi.com",
-  "x-rapidapi-key": "d6489c8178msh5d57f44202c6427p1c8afdjsndb104cc6be66",
+  "x-rapidapi-key": import.meta.env.VITE_COIN_API,
 };
 const cryptoBaseUrl = "https://coinranking1.p.rapidapi.com";
 

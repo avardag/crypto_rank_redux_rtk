@@ -39,7 +39,10 @@ function App() {
         </Switch>
       </div>
       <div className="footer">
-        <Typography variant={"h5"} style={{ textAlign: "center" }}>
+        <Typography
+          variant={"h5"}
+          style={{ marginTop: "2rem", textAlign: "center" }}
+        >
           Copyright © 2021 <Link to="/">ReduxCoin Inc.</Link> <br />
           All Rights Reserved.
         </Typography>

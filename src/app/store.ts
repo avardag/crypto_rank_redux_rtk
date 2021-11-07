@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { cryptoApiSlice } from "./features/cryptoAPI";
+import { newsApiSlice } from "./features/cryptoNews";
 
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
     [cryptoApiSlice.reducerPath]: cryptoApiSlice.reducer,
+    [newsApiSlice.reducerPath]: newsApiSlice.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.

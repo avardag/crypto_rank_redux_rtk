@@ -62,7 +62,7 @@ function Homepage() {
           <Link to="/news">Show more</Link>
         </HomeShowMoreBtn>
       </HomeHeading>
-      <News />
+      <News simplified />
     </div>
   );
 }
