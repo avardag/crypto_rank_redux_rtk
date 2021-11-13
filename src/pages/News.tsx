@@ -40,7 +40,12 @@ function News({ simplified }: { simplified?: boolean }) {
     <div>
       {!simplified && (
         <>
-          <Typography style={{ padding: "1rem 0" }} gutterBottom variant="h2">
+          <Typography
+            style={{ padding: "1rem 0", textAlign: "center" }}
+            gutterBottom
+            color="primary"
+            variant="h2"
+          >
             Latest Cryptocurrency news
           </Typography>
           <Box

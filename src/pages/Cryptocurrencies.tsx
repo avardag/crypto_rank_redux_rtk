@@ -36,7 +36,13 @@ function Cryptocurrencies({ simplified }: { simplified?: boolean }) {
     <div>
       {!simplified && (
         <>
-          <Typography style={{ padding: "1rem 0" }} gutterBottom variant="h2">
+          <Typography
+            style={{ padding: "1rem 0", textAlign: "center" }}
+            color="primary"
+            center
+            gutterBottom
+            variant="h2"
+          >
             List of main cryptocurrencies
           </Typography>
           <Box

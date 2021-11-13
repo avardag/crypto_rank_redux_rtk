@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export type Currency = {
-  allTimeHigh: { price: string; timestamp: Date };
+  allTimeHigh: { price: number; timestamp: Date };
   approvedSupply: boolean;
   change: number;
   circulatingSupply: number;
@@ -12,6 +12,7 @@ export type Currency = {
   iconType: string;
   iconUrl: string;
   id: number;
+  links: { name: string; type: string; url: string }[];
   listedAt: Date;
   marketCap: number;
   name: string;
@@ -29,6 +30,18 @@ export type Currency = {
   volume: number;
   websiteUrl: "https://bitcoin.org";
 };
+export type Stats = {
+  base: string;
+  limit: number;
+  offset: number;
+  order: string;
+  total: number;
+  total24hVolume: number;
+  totalExchanges: number;
+  totalMarketCap: number;
+  totalMarkets: number;
+};
+
 export type APIResponse = {
   data: {
     base: {
@@ -36,17 +49,8 @@ export type APIResponse = {
       symbol: string;
     };
     coins: Currency[];
-    stats: {
-      base: string;
-      limit: number;
-      offset: number;
-      order: string;
-      total: number;
-      total24hVolume: number;
-      totalExchanges: number;
-      totalMarketCap: number;
-      totalMarkets: number;
-    };
+    coin: Currency;
+    stats: Stats;
   };
   status: string;
 };
@@ -71,8 +75,11 @@ export const cryptoApiSlice = createApi({
     getCryptos: builder.query<APIResponse, number>({
       query: (count) => createRequest(`/coins?limit=${count}`),
     }),
+    getCryptoDetails: builder.query<APIResponse, string>({
+      query: (coinId) => createRequest(`/coin/${coinId}`),
+    }),
   }),
 });
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetCryptosQuery } = cryptoApiSlice;
+export const { useGetCryptosQuery, useGetCryptoDetailsQuery } = cryptoApiSlice;

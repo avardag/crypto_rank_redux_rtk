@@ -22,8 +22,14 @@ function Homepage() {
   if (isLoading) return <Loading />;
   return (
     <div>
-      <Paper sx={{ p: 4 }}>
-        <Typography gutterBottom variant="h2" component="div" align={"center"}>
+      <Paper sx={{ p: 4, mt: 4 }}>
+        <Typography
+          gutterBottom
+          variant="h2"
+          color="primary"
+          component="div"
+          align={"center"}
+        >
           Global Crypto stats
         </Typography>
         <Grid container spacing={2}>
