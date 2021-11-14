@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import millify from "millify";
 import { Link } from "react-router-dom";
-import { Currency, useGetCryptosQuery } from "../app/features/cryptoAPI";
+import { useGetCryptosQuery } from "../app/features/cryptoAPI";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -12,6 +12,7 @@ import { CardActionArea } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Loading } from "../components";
+import { Currency } from "../app/features/types";
 
 function Cryptocurrencies({ simplified }: { simplified?: boolean }) {
   const count = simplified ? 10 : 100;
@@ -39,7 +40,6 @@ function Cryptocurrencies({ simplified }: { simplified?: boolean }) {
           <Typography
             style={{ padding: "1rem 0", textAlign: "center" }}
             color="primary"
-            center
             gutterBottom
             variant="h2"
           >
@@ -72,8 +72,8 @@ function Cryptocurrencies({ simplified }: { simplified?: boolean }) {
         {cryptos &&
           cryptos?.map((currency) => (
             <Grid item key={currency.id} xs={12} sm={6} md={4} lg={3}>
-              <Link to={`/crypto/${currency.id}`}>
-                <Card sx={{ maxWidth: 345, minWidth: 275 }}>
+              <Card sx={{ maxWidth: 345, minWidth: 275, margin: "0 auto" }}>
+                <Link to={`/crypto/${currency.id}`}>
                   <CardActionArea>
                     <CardContent>
                       <div
@@ -108,8 +108,8 @@ function Cryptocurrencies({ simplified }: { simplified?: boolean }) {
                       <p>Daily Change: {currency.change}%</p>
                     </CardContent>
                   </CardActionArea>
-                </Card>
-              </Link>
+                </Link>
+              </Card>
             </Grid>
           ))}
       </Grid>

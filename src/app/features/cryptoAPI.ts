@@ -1,59 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-export type Currency = {
-  allTimeHigh: { price: number; timestamp: Date };
-  approvedSupply: boolean;
-  change: number;
-  circulatingSupply: number;
-  color: string;
-  confirmedSupply: boolean;
-  description: string;
-  firstSeen: Date;
-  history: string[];
-  iconType: string;
-  iconUrl: string;
-  id: number;
-  links: { name: string; type: string; url: string }[];
-  listedAt: Date;
-  marketCap: number;
-  name: string;
-  numberOfExchanges: number;
-  numberOfMarkets: number;
-  penalty: boolean;
-  price: number;
-  rank: number;
-  slug: string;
-  socials: string[];
-  symbol: string;
-  totalSupply: number;
-  type: string;
-  uuid: string;
-  volume: number;
-  websiteUrl: "https://bitcoin.org";
-};
-export type Stats = {
-  base: string;
-  limit: number;
-  offset: number;
-  order: string;
-  total: number;
-  total24hVolume: number;
-  totalExchanges: number;
-  totalMarketCap: number;
-  totalMarkets: number;
-};
-
-export type APIResponse = {
-  data: {
-    base: {
-      sign: string;
-      symbol: string;
-    };
-    coins: Currency[];
-    coin: Currency;
-    stats: Stats;
-  };
-  status: string;
-};
+import {
+  APIResponseAll,
+  APIResponseDetails,
+  APIResponseExchange,
+  APIResponseHistory,
+} from "./types";
 
 const cryptoApiHeaders = {
   "x-rapidapi-host": "coinranking1.p.rapidapi.com",
@@ -72,14 +23,29 @@ export const cryptoApiSlice = createApi({
   endpoints: (builder) => ({
     //builder.query<ResultType, QueryArg>
     // getCryptos: builder.query<APIResponse, void>({
-    getCryptos: builder.query<APIResponse, number>({
+    getCryptos: builder.query<APIResponseAll, number>({
       query: (count) => createRequest(`/coins?limit=${count}`),
     }),
-    getCryptoDetails: builder.query<APIResponse, string>({
+    getCryptoDetails: builder.query<APIResponseDetails, string>({
       query: (coinId) => createRequest(`/coin/${coinId}`),
+    }),
+    getCoinHistory: builder.query<
+      APIResponseHistory,
+      { coinId: string; timePeriod: string }
+    >({
+      query: ({ coinId, timePeriod }) =>
+        createRequest(`/coin/${coinId}/history/${timePeriod}`),
+    }),
+    getCryptoExchanges: builder.query<APIResponseExchange, void>({
+      query: (coinId) => createRequest(`/exchanges`),
     }),
   }),
 });
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetCryptosQuery, useGetCryptoDetailsQuery } = cryptoApiSlice;
+export const {
+  useGetCryptosQuery,
+  useGetCryptoDetailsQuery,
+  useGetCoinHistoryQuery,
+  useGetCryptoExchangesQuery,
+} = cryptoApiSlice;

@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
+import styled from "styled-components";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -13,13 +14,24 @@ import {
 } from "./pages";
 import "./App.css";
 
+const Footer = styled.div`
+  background-color: rgb(0, 21, 41);
+  color: white;
+  padding: 1.5rem 0;
+  margin-top: 1rem;
+`;
+const MainContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
 function App() {
   return (
     <div className="app">
       <div className="navbar">
         <Navbar />
       </div>
-      <div className="main" style={{ maxWidth: "1200px", margin: "0 auto" }}>
+      <MainContainer>
         <Switch>
           <Route exact path="/">
             <Homepage />
@@ -37,12 +49,9 @@ function App() {
             <News />
           </Route>
         </Switch>
-      </div>
-      <div className="footer">
-        <Typography
-          variant={"h5"}
-          style={{ marginTop: "2rem", textAlign: "center" }}
-        >
+      </MainContainer>
+      <Footer>
+        <Typography variant={"h5"} align="center">
           Copyright © 2021 <Link to="/">ReduxCoin Inc.</Link> <br />
           All Rights Reserved.
         </Typography>
@@ -57,17 +66,18 @@ function App() {
             <Link to="/">Home</Link>
           </Grid>
           <Grid item>
+            <Link to="/cryptocurrencies">Cryptocurrencies</Link>
+          </Grid>
+          <Grid item>
             <Link to="/exchanges">Exchanges</Link>
           </Grid>
           <Grid item>
             <Link to="/news">News</Link>
           </Grid>
         </Grid>
-      </div>
+      </Footer>
     </div>
   );
 }
 
 export default App;
-
-//56.17

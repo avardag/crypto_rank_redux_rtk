@@ -82,8 +82,15 @@ function News({ simplified }: { simplified?: boolean }) {
         {news &&
           news.value?.map((newsP) => (
             <Grid item key={newsP.url} xs={12} sm={6} md={6} lg={4}>
-              <a href={`${newsP.url}`} target="_blank" rel="noreferrer">
-                <Card sx={{ maxWidth: 345, minWidth: 275, height: "100%" }}>
+              <Card
+                sx={{
+                  maxWidth: 345,
+                  minWidth: 275,
+                  height: "100%",
+                  m: "0 auto",
+                }}
+              >
+                <a href={`${newsP.url}`} target="_blank" rel="noreferrer">
                   <CardActionArea>
                     <CardMedia
                       component="img"
@@ -121,8 +128,8 @@ function News({ simplified }: { simplified?: boolean }) {
                       {newsP.provider[0]?.name}
                     </Typography>
                   </CardActions>
-                </Card>
-              </a>
+                </a>
+              </Card>
             </Grid>
           ))}
       </Grid>

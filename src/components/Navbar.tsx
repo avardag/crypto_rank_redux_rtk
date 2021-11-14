@@ -10,6 +10,8 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Avatar from "@mui/material/Avatar";
 import icon from "../images/cryptocurrency.png";
@@ -23,6 +25,28 @@ const StyledLink = styled(Link)(() => ({
 }));
 
 export default function Navbar() {
+  const links = [
+    {
+      to: "/",
+      title: "Home",
+      icon: <HomeOutlinedIcon />,
+    },
+    {
+      to: "/cryptocurrencies",
+      title: "Cryptocurrencies",
+      icon: <TrendingUpOutlinedIcon />,
+    },
+    {
+      to: "/exchanges",
+      title: "Exchanges",
+      icon: <LocalAtmOutlinedIcon />,
+    },
+    {
+      to: "/news",
+      title: "News",
+      icon: <LightbulbOutlinedIcon />,
+    },
+  ];
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
 
@@ -52,24 +76,13 @@ export default function Navbar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" color="inherit">
-          <HomeOutlinedIcon />
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton size="large" color="inherit">
-          <TrendingUpOutlinedIcon />
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton size="large" color="inherit">
-          <LocalAtmOutlinedIcon />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
+      {links.map((link) => (
+        <MenuItem key={link.title} component={Link} to={link.to} sx={{ p: 2 }}>
+          <ListItemIcon>{link.icon}</ListItemIcon>
+
+          <Typography>{link.title}</Typography>
+        </MenuItem>
+      ))}
     </Menu>
   );
 
@@ -94,42 +107,24 @@ export default function Navbar() {
             sx={{
               display: { xs: "none", sm: "block" },
               textDecoration: "none",
-              color: "info.main",
             }}
           >
             <StyledLink to="/">ReduxCoin</StyledLink>
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Button size="large" color="inherit" component={Link} to="/">
-              <HomeOutlinedIcon />
-              <Typography>Home</Typography>
-            </Button>
-            <Button
-              size="large"
-              color="inherit"
-              component={Link}
-              to="/cryptocurrencies"
-            >
-              <TrendingUpOutlinedIcon />
-
-              <Typography>Cryptocurrencies</Typography>
-            </Button>
-            <Button
-              size="large"
-              color="inherit"
-              component={Link}
-              to="/exchanges"
-            >
-              <LocalAtmOutlinedIcon />
-
-              <Typography>Exchanges</Typography>
-            </Button>
-            <Button size="large" color="inherit" component={Link} to="/news">
-              <LightbulbOutlinedIcon />
-
-              <Typography>News</Typography>
-            </Button>
+            {links.map((link) => (
+              <Button
+                size="large"
+                color="inherit"
+                component={Link}
+                to={link.to}
+                key={link.title}
+              >
+                {link.icon}
+                <Typography>{link.title}</Typography>
+              </Button>
+            ))}
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton

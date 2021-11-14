@@ -2,7 +2,10 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import millify from "millify";
 import parse from "html-react-parser";
-import { useGetCryptoDetailsQuery } from "../app/features/cryptoAPI";
+import {
+  useGetCryptoDetailsQuery,
+  useGetCoinHistoryQuery,
+} from "../app/features/cryptoAPI";
 import { Loading } from "../components";
 import { lightBlue, cyan } from "@mui/material/colors";
 import Box from "@mui/material/Box";
@@ -26,13 +29,16 @@ import {
   ListTitle,
   DetailsHeading,
 } from "./CryptoDetails.styles";
+import { CoinHistoryChart } from "../components";
 
 function CryptoDetails() {
-  const timePeriodsArr = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
+  const timePeriodsArr = ["24h", "7d", "30d", "1y", "5y"];
   const { coinId } = useParams<{ coinId: string }>();
   const [timePeriod, setTimePeriod] = useState("7d");
 
   const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
+  const { data: coinHistoryData, isFetching: isHistoryFetching } =
+    useGetCoinHistoryQuery({ coinId, timePeriod });
 
   const cryptoDetails = data?.data?.coin;
   if (!cryptoDetails) return <Loading />;
@@ -115,7 +121,12 @@ function CryptoDetails() {
           </Select>
         </FormControl>
       </Box>
-      {/*chart*/}
+      <CoinHistoryChart
+        coinHistory={coinHistoryData}
+        currentPrice={cryptoDetails.price}
+        coinName={cryptoDetails.name}
+        isHistoryFetching={isHistoryFetching}
+      />
       <Grid
         container
         alignItems="center"
