@@ -89,57 +89,102 @@ export default function Navbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{ backgroundColor: "rgb(0, 21, 41)" }}>
-        <Toolbar>
-          {/*<IconButton*/}
-          {/*  size="large"*/}
-          {/*  edge="start"*/}
-          {/*  color="inherit"*/}
-          {/*  aria-label="open drawer"*/}
-          {/*  sx={{ mr: 2 }}*/}
-          {/*>*/}
-          {/*  <MenuIcon />*/}
-          {/*</IconButton>*/}
-          <Avatar src={icon} />
-          <Typography
-            variant="h4"
-            noWrap
-            component="div"
-            sx={{
-              display: { xs: "none", sm: "block" },
-              textDecoration: "none",
+        <div style={{ width: "100%" }}>
+          <Toolbar
+            style={{
+              maxWidth: "1200px",
+              margin: "0 auto",
             }}
           >
-            <StyledLink to="/">ReduxCoin</StyledLink>
-          </Typography>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {links.map((link) => (
-              <Button
-                size="large"
-                color="inherit"
-                component={Link}
-                to={link.to}
-                key={link.title}
-              >
-                {link.icon}
-                <Typography>{link.title}</Typography>
-              </Button>
-            ))}
-          </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
+            <Avatar src={icon} />
+            <Typography
+              variant="h4"
+              noWrap
+              component="div"
+              sx={{
+                display: { xs: "none", sm: "block" },
+                textDecoration: "none",
+              }}
             >
-              <MoreIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
+              <StyledLink to="/">ReduxCoin</StyledLink>
+            </Typography>
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+              {links.map((link) => (
+                <Button
+                  size="large"
+                  color="inherit"
+                  component={Link}
+                  to={link.to}
+                  key={link.title}
+                >
+                  {link.icon}
+                  <Typography>{link.title}</Typography>
+                </Button>
+              ))}
+            </Box>
+            <Box sx={{ display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="show more"
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
+            </Box>
+          </Toolbar>
+        </div>
       </AppBar>
       {renderMobileMenu}
     </Box>
   );
+  // return (
+  //   <Box sx={{ flexGrow: 1 }}>
+  //     <AppBar position="static" style={{ backgroundColor: "rgb(0, 21, 41)" }}>
+  //       <Toolbar style={{ maxWidth: "1200px", backgroundColor: "gray" }}>
+  //         <Avatar src={icon} />
+  //         <Typography
+  //           variant="h4"
+  //           noWrap
+  //           component="div"
+  //           sx={{
+  //             display: { xs: "none", sm: "block" },
+  //             textDecoration: "none",
+  //           }}
+  //         >
+  //           <StyledLink to="/">ReduxCoin</StyledLink>
+  //         </Typography>
+  //         <Box sx={{ flexGrow: 1 }} />
+  //         <Box sx={{ display: { xs: "none", md: "flex" } }}>
+  //           {links.map((link) => (
+  //             <Button
+  //               size="large"
+  //               color="inherit"
+  //               component={Link}
+  //               to={link.to}
+  //               key={link.title}
+  //             >
+  //               {link.icon}
+  //               <Typography>{link.title}</Typography>
+  //             </Button>
+  //           ))}
+  //         </Box>
+  //         <Box sx={{ display: { xs: "flex", md: "none" } }}>
+  //           <IconButton
+  //             size="large"
+  //             aria-label="show more"
+  //             aria-haspopup="true"
+  //             onClick={handleMobileMenuOpen}
+  //             color="inherit"
+  //           >
+  //             <MoreIcon />
+  //           </IconButton>
+  //         </Box>
+  //       </Toolbar>
+  //     </AppBar>
+  //     {renderMobileMenu}
+  //   </Box>
+  // );
 }
